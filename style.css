@@ -1,0 +1,81 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    width: 700px;
+    height: auto;
+    box-shadow: 0px 5px 3px 0px grey;
+    border-radius: 8px;
+    padding: 50px;
+}
+
+h1 {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-field {
+    height: 30px;
+    width: 100%;
+}
+
+input[type="url"] {
+    width: calc(100% - 2 * 10px);
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    margin-top: 30px;
+}
+
+.shortened-urls {
+    height: auto;
+    width: 100%;
+    margin-top: 20px;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+ul li{
+    background-color: aqua;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+ul li a{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+ul li a:first-child{
+    max-width: 300px;
+}
+
+.arrow{
+    height: 100%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
