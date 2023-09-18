@@ -1,0 +1,6 @@
+#table1 th,
+#table2 th,
+#table3 th{
+    position: sticky;
+    top: 0;
+}
