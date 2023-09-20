@@ -20,8 +20,6 @@
                         <tr>
                             <th>SL</th>
                             <th>CREATED ON</th>
-                            <th>UPDATED BY</th>
-                            <th>IP</th>
                             <th>FULL URL</th>
                             <th>SHORT CODE</th>
                             <th>HITS</th>
@@ -47,12 +45,10 @@
                                     <td>
                                         <?php
                                         $dateTime = new DateTime($row['created_at']);
-                                        $formattedDate = $dateTime->format('M d, Y');
+                                        $formattedDate = $dateTime->format('d M, Y h:i A');
                                         echo $formattedDate;
                                         ?>
                                     </td>
-                                    <td><?= $row['updated_by'] ?></td>
-                                    <td><?= $row['ip'] ?></td>
                                     <td style="max-width: 250px; overflow: hidden;"><a target="_blank" href="<?= $row['full_url'] ?>"><?= $row['full_url'] ?></a></td>
                                     <td><a target="_blank" href="../<?= $row['short_url_code'] ?>"><?= $row['short_url_code'] ?></a> <i style="cursor: pointer;" onclick="copy_short_url('<?= site_url() . '/' . DIRNAME . $row['short_url_code'] ?>')" class="bi bi-clipboard"></i></td>
                                     <td><?= $row['hits'] ?></td>
@@ -60,10 +56,10 @@
                                     <td>
                                         <?php
                                         $valid_from = new DateTime($row['valid_from']);
-                                        $valid_from = $valid_from->format('M d, Y');
+                                        $valid_from = $valid_from->format('d M, Y h:i A');
                                         $valid_till = new DateTime($row['valid_till']);
-                                        $valid_till = $valid_till->format('M d, Y');
-                                        echo $valid_from . " TO " . $valid_till;
+                                        $valid_till = $valid_till->format('d M, Y h:i A');
+                                        echo $valid_from . "<br/> - </br>" . $valid_till;
                                         ?>
                                     </td>
                                     <td><?= $row['is_active'] == 1 ? 'Active' : 'Deactive' ?></td>
@@ -75,7 +71,6 @@
                                             echo '<a style="cursor: pointer; color: blue;" title="Enable" onclick="url_action(\'' . site_url() . '/' . DIRNAME . '\', \'enable\', ' . $row['id'] . ')"><i class="fas fa-play-circle"></i></a>';
                                         }
                                         ?>
-                                        <a style="cursor: pointer; color: blue;" title="Trash" onclick="url_action('<?= site_url() . '/' . DIRNAME ?>', 'delete', <?= $row['id'] ?>)"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                         <?php
@@ -94,8 +89,6 @@
                         <tr>
                             <th>SL</th>
                             <th>CREATED ON</th>
-                            <th>UPDATED BY</th>
-                            <th>IP</th>
                             <th>FULL URL</th>
                             <th>SHORT CODE</th>
                             <th>HITS</th>
@@ -121,12 +114,10 @@
                                     <td>
                                         <?php
                                         $dateTime = new DateTime($row['created_at']);
-                                        $formattedDate = $dateTime->format('M d, Y');
+                                        $formattedDate = $dateTime->format('d M, Y h:i A');
                                         echo $formattedDate;
                                         ?>
                                     </td>
-                                    <td><?= $row['updated_by'] ?></td>
-                                    <td><?= $row['ip'] ?></td>
                                     <td style="max-width: 250px; overflow: hidden;"><a target="_blank" href="<?= $row['full_url'] ?>"><?= $row['full_url'] ?></a></td>
                                     <td><a target="_blank" href="../<?= $row['short_url_code'] ?>"><?= $row['short_url_code'] ?></a> <i style="cursor: pointer;" onclick="copy_short_url('<?= site_url() . '/' . DIRNAME . $row['short_url_code'] ?>')" class="bi bi-clipboard"></i></td>
                                     <td><?= $row['hits'] ?></td>
@@ -134,10 +125,10 @@
                                     <td>
                                         <?php
                                         $valid_from = new DateTime($row['valid_from']);
-                                        $valid_from = $valid_from->format('M d, Y');
+                                        $valid_from = $valid_from->format('d M, Y h:i A');
                                         $valid_till = new DateTime($row['valid_till']);
-                                        $valid_till = $valid_till->format('M d, Y');
-                                        echo $valid_from . " TO " . $valid_till;
+                                        $valid_till = $valid_till->format('d M, Y h:i A');
+                                        echo $valid_from . "<br/> - </br>" . $valid_till;
                                         ?>
                                     </td>
                                     <td><?= $row['is_active'] == 1 ? 'Active' : 'Deactive' ?></td>
@@ -149,7 +140,6 @@
                                             echo '<a style="cursor: pointer; color: blue;" title="Enable" onclick="url_action(\'' . DIRNAME . '\', \'enable\', ' . $row['id'] . ')"><i class="fas fa-play-circle"></i></a>';
                                         }
                                         ?>
-                                        <a style="cursor: pointer; color: blue;" title="Trash" onclick="url_action('<?= DIRNAME ?>', 'delete', <?= $row['id'] ?>)"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                         <?php
@@ -168,8 +158,6 @@
                         <tr>
                             <th>SL</th>
                             <th>CREATED ON</th>
-                            <th>UPDATED BY</th>
-                            <th>IP</th>
                             <th>FULL URL</th>
                             <th>SHORT CODE</th>
                             <th>HITS</th>
@@ -195,12 +183,10 @@
                                     <td>
                                         <?php
                                         $dateTime = new DateTime($row['created_at']);
-                                        $formattedDate = $dateTime->format('M d, Y');
+                                        $formattedDate = $dateTime->format('d M, Yd M, Y h:i A');
                                         echo $formattedDate;
                                         ?>
                                     </td>
-                                    <td><?= $row['updated_by'] ?></td>
-                                    <td><?= $row['ip'] ?></td>
                                     <td style="max-width: 250px; overflow: hidden;"><a target="_blank" href="<?= $row['full_url'] ?>"><?= $row['full_url'] ?></a></td>
                                     <td><a target="_blank" href="../<?= $row['short_url_code'] ?>"><?= $row['short_url_code'] ?></a> <i style="cursor: pointer;" onclick="copy_short_url('<?= site_url() . '/' . DIRNAME . $row['short_url_code'] ?>')" class="bi bi-clipboard"></i></td>
                                     <td><?= $row['hits'] ?></td>
@@ -208,10 +194,10 @@
                                     <td>
                                         <?php
                                         $valid_from = new DateTime($row['valid_from']);
-                                        $valid_from = $valid_from->format('M d, Y');
+                                        $valid_from = $valid_from->format('d M, Y h:i A');
                                         $valid_till = new DateTime($row['valid_till']);
-                                        $valid_till = $valid_till->format('M d, Y');
-                                        echo $valid_from . " TO " . $valid_till;
+                                        $valid_till = $valid_till->format('d M, Y h:i A');
+                                        echo $valid_from . "<br/> - </br>" . $valid_till;
                                         ?>
                                     </td>
                                     <td><?= $row['is_active'] == 1 ? 'Active' : 'Deactive' ?></td>
@@ -223,7 +209,6 @@
                                             echo '<a style="cursor: pointer; color: blue;" title="Enable" onclick="url_action(\'' . DIRNAME . '\', \'enable\', ' . $row['id'] . ')"><i class="fas fa-play-circle"></i></a>';
                                         }
                                         ?>
-                                        <a style="cursor: pointer; color: blue;" title="Trash" onclick="url_action('<?= DIRNAME ?>', 'delete', <?= $row['id'] ?>)"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                         <?php

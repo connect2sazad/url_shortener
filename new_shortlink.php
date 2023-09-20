@@ -13,7 +13,7 @@
     <div class="wrapper">
         <h1><?= SITE_NAME ?></h1>
         <p>Paste the URL to be shortened</p>
-        <form method="post" id="shorten">
+        <form method="post" id="shorten" action="./in/create-short-url">
             <div class="input-field">
                 <input type="url" name="full_url" id="full_url" required>
             </div>

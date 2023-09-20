@@ -6,9 +6,9 @@ require_once "constants.php";
 require_once ___ABS_PATH___.'config.php';
 require_once ___ABS_PATH___.'functions.php';
 
-if(!isset($_SESSION[USER_GLOBAL_VAR])){
-    header('Location: ./in/login/');
-}
+// if(!isset($_SESSION[USER_GLOBAL_VAR])){
+//     header('Location: ./in/login/');
+// }
 
 $short_code = str_replace('/' . DIRNAME, '', $_SERVER['REQUEST_URI']);
 

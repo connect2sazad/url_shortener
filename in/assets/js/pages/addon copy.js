@@ -261,12 +261,21 @@ function save_url(preurl) {
 
 function create_qr(event) {
     var url = $('#full_url').val();
+    var company_logo = $('#company_logo').val();
+
+    $('#logo').attr('src', company_logo);
 
     var frontend_list = "<div class=\"alert alert-primary\">";
-    frontend_list += "<h4 class=\"alert-heading\">New QR Created</h4>";
-    frontend_list += "<div id=\"qrcode\" style=\"height:200px;width:200px;\"></div>";
-    frontend_list += "<button class=\"btn btn-secondary mt-3\" onclick=\"download_qr()\">Download QR</button>"
-    frontend_list += "</div>";
+    frontend_list = "<h4 class=\"alert-heading\">New QR Created</h4>";
+    frontend_list = "<div class=\"row\">";
+    frontend_list = "<div class=\"col-8\">";
+    frontend_list = "<a href=\"url\">url</a><br/>";
+    frontend_list = "<button class=\"btn btn-secondary mt-3\" onclick=\"download_qr()\">Download QR</button>";
+    frontend_list = "</div>";
+    frontend_list = "<div class=\"col-4\">";
+    frontend_list = "</div>";
+    frontend_list = "</div>";
+    frontend_list = "</div>";
     $('#status-message').html(frontend_list);
 
     const qrCode = new QRCode(document.getElementById("qrcode"), {
@@ -317,7 +326,7 @@ function download_qr() {
         downloadLink.click();
 
         // Clean up by removing the anchor element
-        document.body.removeChild(downloadLink);
+        // document.body.removeChild(downloadLink);
     });
 }
 
@@ -330,3 +339,5 @@ $(document).ready(function () {
         localStorage.removeItem('new_url');
     }
 });
+
+

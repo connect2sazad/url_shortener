@@ -10,7 +10,7 @@
     $res = login($conn, $username, $password);
 
     if(@$res['status'] == 'success'){
-        header('location: ../');
+        header('location: ../create-short-url');
     } else {
         echo 'Incorrect Credentials. Please try again <a href="./">Go back</a>';
     }

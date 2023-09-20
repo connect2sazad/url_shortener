@@ -2,9 +2,9 @@
 
 session_start();
 
-require_once "constants.php";
-require_once "config.php";
-require_once "functions.php";
+require_once "../../constants.php";
+require_once ___ABS_PATH___.'config.php';
+require_once ___ABS_PATH___.'functions.php';
 
 $full_url = isset($_POST['full_url']) ? $_POST['full_url'] : '';
 $validity = 180;
