@@ -7,7 +7,7 @@ require_once ___ABS_PATH___ . 'config.php';
 require_once ___ABS_PATH___ . 'functions.php';
 
 if (!isset($_SESSION[USER_GLOBAL_VAR])) {
-    header('location: ./login/');
+    header('location: ./login/?r=' . current_full_url());
 }
 
 // $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
@@ -65,6 +65,7 @@ $is_admin = is_admin($conn, $_SESSION[USER_GLOBAL_VAR]);
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
+                                    <li><a class="dropdown-item" href="./my-account">My Account</a></li>
                                     <li><a class="dropdown-item" href="./settings">Settings</a></li>
                                     <li><a class="dropdown-item" href="./logout">Logout</a></li>
                                     <!-- <li>
@@ -101,30 +102,70 @@ $is_admin = is_admin($conn, $_SESSION[USER_GLOBAL_VAR]);
                 <nav class="main-navbar">
                     <div class="container">
                         <ul>
-                            <li class="menu-item">
+                            <li class="menu-item  has-sub">
+                                <a href="#" class='menu-link'>
+                                    <i class="bi bi-link-45deg"></i>
+                                    <span>URL Services</span>
+                                </a>
+                                <div class="submenu ">
+                                    <!-- submenu -->
+                                    <div class="submenu-group-wrapper">
+                                        <ul class="submenu-group">
+                                            <li class="submenu-item  ">
+                                                <a href="./create-short-url" class='submenu-link'>Create Short URL</a>
+                                            </li>
+                                            <li class="submenu-item  ">
+                                                <a href="./shortened-urls" class='submenu-link'>My Short URLs</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- <li class="menu-item">
                                 <a href="./create-short-url" class='menu-link'>
                                     <i class="bi bi-plus"></i>
                                     <span>Create Short URL</span>
                                 </a>
-                            </li>
-                            <li class="menu-item">
+                            </li> -->
+                            <!-- <li class="menu-item">
                                 <a href="./shortened-urls" class='menu-link'>
                                     <i class="bi bi-link-45deg"></i>
                                     <span>My Short URLs</span>
                                 </a>
+                            </li> -->
+                            <li class="menu-item  has-sub">
+                                <a href="#" class='menu-link'>
+                                    <i class="bi bi-link-45deg"></i>
+                                    <span>QR Services</span>
+                                </a>
+                                <div class="submenu ">
+                                    <!-- submenu -->
+                                    <div class="submenu-group-wrapper">
+                                        <ul class="submenu-group">
+                                            <li class="submenu-item  ">
+                                                <a href="./create-qr" class='submenu-link'>Create QR</a>
+                                            </li>
+                                            <li class="submenu-item  ">
+                                                <a href="./created-qrs" class='submenu-link'>My QRs</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
                             </li>
-                            <li class="menu-item">
+                            <!-- <li class="menu-item">
                                 <a href="./create-qr" class='menu-link'>
                                     <i class="bi bi-plus"></i>
                                     <span>Create QR</span>
                                 </a>
-                            </li>
-                            <li class="menu-item">
+                            </li> -->
+                            <!-- <li class="menu-item">
                                 <a href="./created-qrs" class='menu-link'>
                                     <i class="bi bi-qr-code"></i>
                                     <span>My QRs</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <?php
                             if ($is_admin) {
                             ?>
@@ -138,17 +179,24 @@ $is_admin = is_admin($conn, $_SESSION[USER_GLOBAL_VAR]);
                             }
                             ?>
                             <li class="menu-item">
-                                <a href="./settings" class='menu-link'>
-                                    <i class="bi bi-gear-fill"></i>
-                                    <span>Settings</span>
+                                <a href="./packages" class='menu-link'>
+                                    <i class="bi bi-box"></i>
+                                    <span>Packages</span>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="./logout/" class='menu-link'>
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    <span>Logout</span>
+                                <a href="./transactions" class='menu-link'>
+                                    <i class="bi bi-cash"></i>
+                                    <span>Transactions</span>
                                 </a>
                             </li>
+                            <li class="menu-item">
+                                <a href="./my-account" class='menu-link'>
+                                    <i class="bi bi-person"></i>
+                                    <span>My Account</span>
+                                </a>
+                            </li>
+
 
 
                         </ul>
@@ -185,7 +233,7 @@ $is_admin = is_admin($conn, $_SESSION[USER_GLOBAL_VAR]);
     </div>
 
     <!-- <img id="logo" style="opacity: 0;" src="./assets/images/logo/favicon.png" style="z-index:0;" alt="Company Logo"> -->
-    <img id="logo" src="./assets/images/logo/favicon.png" alt="Company Logo">
+    <!-- <img id="logo" src="./assets/images/logo/favicon.png" alt="Company Logo"> -->
 
     <script src="./assets/js/bootstrap.js"></script>
     <script src="./assets/js/app.min.js"></script>
@@ -196,7 +244,7 @@ $is_admin = is_admin($conn, $_SESSION[USER_GLOBAL_VAR]);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script src="./assets/extensions/qrcode/qrcode.min.js"></script>
     <script src="./assets/js/pages/datatables.js"></script>
-    <script src="./assets/js/pages/addon.js"></script>
+    <script src="./assets/js/addon.js"></script>
 
 </body>
 

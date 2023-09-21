@@ -9,6 +9,7 @@ require_once ___ABS_PATH___.'functions.php';
     $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
     $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $r = isset($_POST['r']) ? $_POST['r'] : '';
 
     $query = "INSERT INTO `users` (`full_name`, `username`, `password`, `email`, `phone`) VALUES ('$name', '$username', '".password_hash($password, PASSWORD_DEFAULT)."', '$email', '$phone');";
     $run_query = mysqli_query($conn, $query);
@@ -16,6 +17,12 @@ require_once ___ABS_PATH___.'functions.php';
     if($run_query){
         session_start();
         $_SESSION[USER_GLOBAL_VAR] = $username;
+        
+
+        if($r!=''){
+            header('location: '.$r);
+        }
+
         header('Location: ../');
     } else {
         echo "Unable to sign up";

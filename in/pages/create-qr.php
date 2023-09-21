@@ -8,9 +8,9 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form method="post" onsubmit="return create_qr(this)">
+                            <form method="post" onsubmit="return create_qr('<?= site_url() . '/' . DIRNAME ?>')">
                                 <div class="form-group">
-                                    <label for="long_url">Enter URL for which you want to create QR:</label>
+                                    <label for="full_url">Enter URL for which you want to create QR:</label>
                                     <input type="url" class="form-control" name="full_url" id="full_url" required>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">

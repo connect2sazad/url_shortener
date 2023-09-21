@@ -4,3 +4,62 @@
     position: sticky;
     top: 0;
 }
+
+.table td{
+    position: relative;
+}
+
+/* .uit:hover .hdb {
+    display: flex;
+    transition: 0.5s ease all;
+    cursor: pointer;
+} */
+
+/* .hdb {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: auto;
+    width: 200px;
+    margin-left: -72px;
+    margin-top: -26px;
+    transform: scale(1.5);
+    background-color: white;
+    z-index: 4;
+    border-radius: 8px;
+    border: 1px solid grey;
+}
+
+.hdb::before {
+    content: '';
+    position: absolute;
+    height: 20px;
+    background-color: grey;
+    background: none;
+    border: 10px solid grey;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    top: 75px;
+    left: -20px;
+    
+}
+
+.qrcode{
+    width: 200px;
+    height: 200px;
+}
+ */
+
+ 
+.uit i{
+    cursor: pointer;
+}
+
+::-webkit-inner-spin-button{
+    display: none;
+}

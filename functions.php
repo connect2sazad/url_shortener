@@ -100,6 +100,17 @@ function site_url()
 
     return $currentUrl;
 }
+
+function current_full_url()
+{
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://";
+    $host = $_SERVER['HTTP_HOST'];
+    $uri = $_SERVER['REQUEST_URI'];
+
+    $fullUrl = $protocol . $host . $uri;
+
+    return $fullUrl;
+}
 /****************************************GENRAL FUNCTIONS END**********************************************************/
 
 
@@ -144,22 +155,46 @@ function getAllURLs($conn, $service_type)
     return $run_query;
 }
 
+function getAllQRs($conn, $service_type)
+{
+    switch ($service_type) {
+        case 'paid':
+            $query = "SELECT * FROM `qrcodes` WHERE `qrcodes`.`is_paid` = 1 ORDER BY `qrcodes`.`id` DESC;";
+            break;
+        case 'free':
+            $query = "SELECT * FROM `qrcodes` WHERE `qrcodes`.`is_paid` = 0 ORDER BY `qrcodes`.`id` DESC;";
+            break;
+        default:
+            $query = "SELECT * FROM `qrcodes` ORDER BY `qrcodes`.`id` DESC;";
+    }
+
+    $run_query = mysqli_query($conn, $query);
+    return $run_query;
+}
+
 function check_url_validity($conn, $short_code)
 {
     $query = "SELECT * FROM `redirects` WHERE `redirects`.`short_url_code` = '$short_code'";
     $run_query = mysqli_query($conn, $query);
-    if(mysqli_num_rows($run_query)){
+    if (mysqli_num_rows($run_query)) {
         $fetch = mysqli_fetch_assoc($run_query);
         $valid_till = $fetch['valid_till'];
         $valid_till = new DateTime($valid_till);
         $todayDate = new DateTime();
-        if($todayDate > $valid_till){
+        if ($todayDate > $valid_till) {
             return true;
         } else {
             return false;
         }
     }
 }
+
+function get_user($conn, $username){
+    $query = "SELECT * FROM `users` WHERE `users`.`username` = '$username';";
+    $run_query = mysqli_query($conn, $query);
+    return $run_query;
+}
+
 function get_user_type($conn, $username)
 {
     $query = "SELECT * FROM `users` WHERE `users`.`username` = '$username'";
@@ -175,16 +210,18 @@ function get_user_type($conn, $username)
     return $fetch2;
 }
 
-function is_admin($conn, $username){
+function is_admin($conn, $username)
+{
     $user_type = get_user_type($conn, $_SESSION[USER_GLOBAL_VAR]);
     $user_type = $user_type['type_name'];
-    if($user_type == 'admin')
+    if ($user_type == 'admin')
         return true;
     else
         return false;
 }
 
-function getAllURLsByUsers($conn, $service_type, $user){
+function getAllURLsByUsers($conn, $service_type, $user)
+{
     switch ($service_type) {
         case 'paid':
             $query = "SELECT * FROM `redirects` WHERE `redirects`.`created_by` = '$user' AND `redirects`.`is_paid` = 1 ORDER BY `redirects`.`id` DESC;";

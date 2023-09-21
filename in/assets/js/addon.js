@@ -202,7 +202,7 @@ $('#full_url').click(async function () {
 
 function save_url(preurl) {
 
-    var url = preurl + 'in/pages/shorten.php';
+    var url = preurl + 'in/actions/shorten.php';
 
     var data = {
         'full_url': $('#full_url').val()
@@ -213,7 +213,7 @@ function save_url(preurl) {
         method: 'POST',
         data: data,
         success: function (result) {
-            console.log(result);
+            // console.log(result);
             var response = JSON.parse(result);
             if (response.status == 1) {
 
@@ -259,41 +259,67 @@ function save_url(preurl) {
     return false;
 };
 
-function create_qr(event) {
-    var url = $('#full_url').val();
+function create_qr(preurl) {
+    var full_url = $('#full_url').val();
 
     var frontend_list = "<div class=\"alert alert-primary\">";
     frontend_list += "<h4 class=\"alert-heading\">New QR Created</h4>";
+    frontend_list += "<div class=\"row\">";
+    frontend_list += "<div class=\"col-8\">";
+    frontend_list += "Full URL: <a href=\"" + full_url + "\">" + full_url + "</a><br />";
+    frontend_list += "<button class=\"btn btn-secondary mt-3\" onclick=\"download_qr()\">Download QR</button>";
+    frontend_list += "</div>";
+    frontend_list += "<div class=\"col-4\">";
     frontend_list += "<div id=\"qrcode\" style=\"height:200px;width:200px;\"></div>";
-    frontend_list += "<button class=\"btn btn-secondary mt-3\" onclick=\"download_qr()\">Download QR</button>"
+    frontend_list += "</div>";
     frontend_list += "</div>";
     $('#status-message').html(frontend_list);
 
     const qrCode = new QRCode(document.getElementById("qrcode"), {
-        text: url, // Replace with your link
+        text: full_url, // Replace with your link
         width: 200,
         height: 200,
     });
 
-    html2canvas(document.getElementById("qrcode")).then((canvas) => {
-        const qrCodeImage = canvas.toDataURL("image/png");
-        const logo = document.getElementById("logo");
+    // html2canvas(document.getElementById("qrcode")).then((canvas) => {
+    //     const qrCodeImage = canvas.toDataURL("image/png");
+    //     const logo = document.getElementById("logo");
 
-        const qrCodeWithLogo = new Image();
-        qrCodeWithLogo.src = qrCodeImage;
-        qrCodeWithLogo.onload = () => {
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(logo, 75, 75, 40, 40); // Adjust the positioning and size as needed
-            document.getElementById("qrcode").innerHTML = '';
-            document.getElementById("qrcode").appendChild(canvas);
-            logo.remove();
-        };
+    //     const qrCodeWithLogo = new Image();
+    //     qrCodeWithLogo.src = qrCodeImage;
+    //     qrCodeWithLogo.onload = () => {
+    //         const ctx = canvas.getContext("2d");
+    //         ctx.drawImage(logo, 75, 75, 40, 40); // Adjust the positioning and size as needed
+    //         document.getElementById("qrcode").innerHTML = '';
+    //         document.getElementById("qrcode").appendChild(canvas);
+    //         logo.remove();
+    //     };
 
-        // Prevent the default behavior of any parent element, such as a form submit
-        if (event.preventDefault) {
-            event.preventDefault();
-        } else {
-            event.returnValue = false; // For older browsers
+    //     // Prevent the default behavior of any parent element, such as a form submit
+    //     if (event.preventDefault) {
+    //         event.preventDefault();
+    //     } else {
+    //         event.returnValue = false; // For older browsers
+    //     }
+    // });
+
+    var action_url = preurl + 'in/actions/qrsaver.php';
+
+    var data = {
+        'full_url': full_url
+    }
+
+    $.ajax({
+        url: action_url,
+        method: 'POST',
+        data: data,
+        success: function (result) {
+            var response = JSON.parse(result);
+            if (response.status == 1) {
+                console.log(response.message);
+            } else {
+                console.log(response.message);
+            }
         }
     });
 
@@ -321,12 +347,182 @@ function download_qr() {
     });
 }
 
+function qr_action(preurl, action_name, id, value) {
+    preurl += 'in/actions/'
+    switch (action_name) {
+        case 'enable':
+            qr_enable(preurl, id)
+            break;
+
+        case 'disable':
+            qr_disable(preurl, id)
+            break;
+
+        case 'delete':
+            qr_delete(preurl, id)
+            break;
+
+        case 'change_validity':
+            qr_change_validity(preurl, id, value);
+            break;
+    }
+}
+
+function qr_enable(preurl, id) {
+    var data = { 'id': id };
+    $.ajax({
+        url: preurl + 'qr_enable.php',
+        method: 'POST',
+        data: data,
+        success: function (result) {
+            var response = JSON.parse(result);
+            console.log(response);
+            window.location.href = './created-qrs';
+        }
+    });
+}
+
+function qr_disable(preurl, id) {
+    var data = { 'id': id };
+    $.ajax({
+        url: preurl + 'qr_disable.php',
+        method: 'POST',
+        data: data,
+        success: function (result) {
+            var response = JSON.parse(result);
+            console.log(response);
+            window.location.href = './created-qrs';
+        }
+    });
+}
+
+function qr_delete(preurl, id) {
+    var data = { 'id': id };
+    $.ajax({
+        url: preurl + 'qr_delete.php',
+        method: 'POST',
+        data: data,
+        success: function (result) {
+            var response = JSON.parse(result);
+            console.log(response);
+            window.location.href = './created-qrs';
+        }
+    });
+}
+
+function qr_change_validity(preurl, id, value) {
+    // alert(preurl)
+    var data = { 'id': id, 'validity': value };
+    $.ajax({
+        url: preurl + 'qr_change_validity.php',
+        method: 'POST',
+        data: data,
+        success: function (result) {
+            console.log(result);
+            var response = JSON.parse(result);
+            window.location.href = './created-qrs';
+        }
+    });
+}
 
 
+
+
+// Document 
 $(document).ready(function () {
     var new_url = localStorage.getItem('new_url');
     if (new_url) {
         $('#full_url').val(new_url);
         localStorage.removeItem('new_url');
     }
+
+    // $('[id^="uit-a"]').click(function () {
+
+    //     var id = this.id;
+    //     id = id.replace("uit-a", "");
+
+    //     var qr_wrapper = $('#qr-code-wrapper');
+
+    //     var full_url = $('#full-url-a' + id).attr("href");;
+
+    //     const qrCode = new QRCode(qr_wrapper, {
+    //         text: full_url, // Replace with your link
+    //         width: 200,
+    //         height: 200,
+    //     });
+    // });
+
+    // $('[id^="uit-a"]').click(function () {
+    //     var id = this.id;
+    //     id = id.replace("uit-a", "");
+    //     console.log(id);
+    //     $('[id^="hdb-a"]').css('display', 'none');
+    //     $('#hdb-a' + id).css({
+    //         display: 'flex',
+    //         transition: '0.5s ease all'
+    //     });
+
+    //     var full_url = $('#full-url-a' + id).attr("href");;
+    //     const qrCode = new QRCode($('#qrcode-a' + id), {
+    //         text: full_url, // Replace with your link
+    //         width: 200,
+    //         height: 200,
+    //     });
+
+    // });
+
+    // $(document).keydown(function (event) {
+    //     if (event.key === "Escape") {
+    //         $('[id^="hdb-a"]').hide();
+    //     }
+    // });
+
 });
+
+function generate_qrcode(full_url) {
+    $('#qr-code-wrapper').empty();
+    const qrCode = new QRCode(document.getElementById("qr-code-wrapper"), {
+        text: full_url, // Replace with your link
+        width: 200,
+        height: 200,
+    });
+}
+
+function download_qrcode() {
+    html2canvas(document.getElementById("qr-code-wrapper")).then(function (canvas) {
+        // Convert the canvas to a data URL
+        const qrCodeImage = canvas.toDataURL("image/png");
+
+        // Create a temporary anchor element for downloading
+        const downloadLink = document.createElement("a");
+        downloadLink.href = qrCodeImage;
+        downloadLink.download = "qrcode.png"; // Specify the filename
+        downloadLink.style.display = "none";
+
+        // Append the anchor element to the document and trigger the download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+
+        // Clean up by removing the anchor element
+        document.body.removeChild(downloadLink);
+    });
+}
+
+
+
+function update_profile(event, preurl) {
+    var url = preurl+'in/actions/update_profile.php';
+    const data = new FormData(event.target);
+    console.log(data);
+    // $.ajax({
+    //     url: url,
+    //     method: 'POST',
+    //     data: data,
+    //     success: function (result) {
+    //         console.log(result);
+            // var response = JSON.parse(result);
+            // window.location.href = '.';
+    //     }
+    // });
+    return false;
+}

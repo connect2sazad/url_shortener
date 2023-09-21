@@ -4,11 +4,11 @@ verify list
 
 
 
-
-sign up>
+<!-- 
+sign up> -->
 <!-- name -->
 <!-- username -->
 email -> otp
 <!-- phone -->
-pass
-cnf pass
+<!-- pass -->
+<!-- cnf pass -->

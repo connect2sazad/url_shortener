@@ -8,6 +8,8 @@
         header('location: ../');
     }
 
+    $r = isset($_GET['r']) ? $_GET['r'] : '';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +37,7 @@
                             <h1 class="auth-title">Sign up.</h1>
 
                             <form action="./signup.php" method="POST" onsubmit="return validate_signup()">
+                                <input type="hidden" name="r" value="<?= $r ?>">
                                 <div class="form-group position-relative has-icon-left mb-4">
                                     <input type="text" class="form-control form-control-xl" placeholder="Name" name="name" required id="name">
                                     <div class="form-control-icon">
@@ -74,7 +77,7 @@
                                 <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Sign Up</button>
                             </form>
                             <p class="mt-3">
-                                Already have an account? <a href="../login/">Log In</a>
+                                Already have an account? <a href="../login/?r=<?= $r ?>">Log In</a>
                             </p>
                         </div>
                     </div>

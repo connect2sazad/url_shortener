@@ -8,6 +8,8 @@
         header('location: ../');
     }
 
+    $r = isset($_GET['r']) ? $_GET['r'] : '';
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +37,7 @@
                             <h1 class="auth-title">Log in.</h1>
 
                             <form action="./auth.php" method="POST">
+                                <input type="hidden" name="r" value="<?= $r ?>">
                                 <div class="form-group position-relative has-icon-left mb-4">
                                     <input type="text" class="form-control form-control-xl" placeholder="Username" name="username">
                                     <div class="form-control-icon">
@@ -50,7 +53,7 @@
                                 <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
                             </form>
                             <p class="mt-3">
-                                New here? <a href="../register/">Sign Up</a>
+                                New here? <a href="../register/?r=<?= $r ?>">Sign Up</a>
                             </p>
                         </div>
                     </div>
