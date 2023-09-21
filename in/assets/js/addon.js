@@ -1,3 +1,8 @@
+const getDataFromInput = (arg) => {
+    return $('#'+arg).val();
+}
+
+
 function url_action(preurl, action_name, id, value) {
     preurl += 'in/actions/'
     switch (action_name) {
@@ -510,19 +515,29 @@ function download_qrcode() {
 
 
 
-function update_profile(event, preurl) {
+function update_profile(preurl) {
+
     var url = preurl+'in/actions/update_profile.php';
-    const data = new FormData(event.target);
-    console.log(data);
-    // $.ajax({
-    //     url: url,
-    //     method: 'POST',
-    //     data: data,
-    //     success: function (result) {
-    //         console.log(result);
-            // var response = JSON.parse(result);
-            // window.location.href = '.';
-    //     }
-    // });
+    // console.log(url);
+
+    var data = {
+        id: getDataFromInput('id'),
+        full_name: getDataFromInput('full_name'),
+        phone: getDataFromInput('phone'),
+        address: getDataFromInput('address'),
+        city: getDataFromInput('city'),
+        state: getDataFromInput('state'),
+        pin: getDataFromInput('pin'),
+    }
+
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: data,
+        success: function (result) {
+            alert(JSON.parse(result).message);
+        }
+    });
+
     return false;
 }

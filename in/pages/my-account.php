@@ -16,9 +16,10 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" onsubmit="return update_profile('<?= site_url() . '/' . DIRNAME ?>')">
+                            <form class="form" id="profile_update_form" method="POST" onsubmit="return update_profile('<?= site_url() . '/' . DIRNAME ?>')">
                                 <div class="row">
                                     <div class="col-md-6 col-12">
+                                        <input type="hidden" id="id" value="<?= $fetch['id'] ?>" readonly>
                                         <div class="form-group">
                                             <label for="full_name">Full Name</label>
                                             <input type="text" id="full_name" class="form-control" placeholder="Full Name" name="full_name" value="<?= $fetch['full_name'] ?>" required>
@@ -27,7 +28,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="username">Username</label>
-                                            <input type="text" id="username" class="form-control" placeholder="Username" name="username" value="<?= $fetch['username'] ?>" required/>
+                                            <input type="text" id="username" class="form-control" placeholder="Username" name="username" value="<?= $fetch['username'] ?>" disabled readonly/>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
